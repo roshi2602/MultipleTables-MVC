@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CompanyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="int" Nullable="false" />
+          <Property Name="cname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cloc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyCentres">
+          <Key>
+            <PropertyRef Name="ccId" />
+          </Key>
+          <Property Name="ccId" Type="int" Nullable="false" />
+          <Property Name="cccountry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ccity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="mycid" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CompanyCe__mycid__286302EC">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="CompanyCentres" Type="Self.CompanyCentres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cid" />
+            </Principal>
+            <Dependent Role="CompanyCentres">
+              <PropertyRef Name="mycid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyDBModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyCentres" EntityType="Self.CompanyCentres" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CompanyCe__mycid__286302EC" Association="Self.FK__CompanyCe__mycid__286302EC">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyCentres" EntitySet="CompanyCentres" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CompanyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="Int32" Nullable="false" />
+          <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cloc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CompanyCentres" Relationship="Self.FK__CompanyCe__mycid__286302EC" FromRole="Company" ToRole="CompanyCentres" />
+        </EntityType>
+        <EntityType Name="CompanyCentre">
+          <Key>
+            <PropertyRef Name="ccId" />
+          </Key>
+          <Property Name="ccId" Type="Int32" Nullable="false" />
+          <Property Name="cccountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ccity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mycid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__CompanyCe__mycid__286302EC" FromRole="CompanyCentres" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK__CompanyCe__mycid__286302EC">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="CompanyCentres" Type="Self.CompanyCentre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="cid" />
+            </Principal>
+            <Dependent Role="CompanyCentres">
+              <PropertyRef Name="mycid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CompanyDBEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="CompanyCentres" EntityType="Self.CompanyCentre" />
+          <AssociationSet Name="FK__CompanyCe__mycid__286302EC" Association="Self.FK__CompanyCe__mycid__286302EC">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyCentres" EntitySet="CompanyCentres" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CompanyDBModelStoreContainer" CdmEntityContainer="CompanyDBEntities3">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="CompanyDBModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="cid" ColumnName="cid" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="cloc" ColumnName="cloc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyCentres">
+            <EntityTypeMapping TypeName="CompanyDBModel.CompanyCentre">
+              <MappingFragment StoreEntitySet="CompanyCentres">
+                <ScalarProperty Name="ccId" ColumnName="ccId" />
+                <ScalarProperty Name="cccountry" ColumnName="cccountry" />
+                <ScalarProperty Name="ccity" ColumnName="ccity" />
+                <ScalarProperty Name="mycid" ColumnName="mycid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

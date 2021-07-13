@@ -1,0 +1,42 @@
+﻿@model MultipleTablesinMVC.Models.CompanyCentre
+
+@{
+    ViewBag.title = "my company details";
+}
+
+<h2>company centres</h2>
+
+<table>
+    <tr>
+        <td>
+            @Model.ccId
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            @Model.cccountry
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            @Model.ccity
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            @Model.mycid
+        </td>
+
+    </tr>
+</table>
+<p>
+  
+        @Html.ActionLink("back to company", "MyCompany", "Company", new { cid = Model.ccId },null);
+    <!--syntax of action link-
+        (string text, action method, controller, new{controller id= model.second controller id}, null)
+        -->
+
+</p>

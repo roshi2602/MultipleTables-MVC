@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompanyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="Int32" Nullable="false" />
+    <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cloc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CompanyCentres" Relationship="Self.FK__CompanyCe__mycid__286302EC" FromRole="Company" ToRole="CompanyCentres" />
+  </EntityType>
+  <EntityType Name="CompanyCentre">
+    <Key>
+      <PropertyRef Name="ccId" />
+    </Key>
+    <Property Name="ccId" Type="Int32" Nullable="false" />
+    <Property Name="cccountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ccity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mycid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="Self.FK__CompanyCe__mycid__286302EC" FromRole="CompanyCentres" ToRole="Company" />
+  </EntityType>
+  <Association Name="FK__CompanyCe__mycid__286302EC">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyCentres" Type="Self.CompanyCentre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="cid" />
+      </Principal>
+      <Dependent Role="CompanyCentres">
+        <PropertyRef Name="mycid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CompanyDBEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="CompanyCentres" EntityType="Self.CompanyCentre" />
+    <AssociationSet Name="FK__CompanyCe__mycid__286302EC" Association="Self.FK__CompanyCe__mycid__286302EC">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="CompanyCentres" EntitySet="CompanyCentres" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

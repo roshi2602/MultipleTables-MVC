@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CompanyDBModelStoreContainer" CdmEntityContainer="CompanyDBEntities3">
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="CompanyDBModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="cid" ColumnName="cid" />
+          <ScalarProperty Name="cname" ColumnName="cname" />
+          <ScalarProperty Name="cloc" ColumnName="cloc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyCentres">
+      <EntityTypeMapping TypeName="CompanyDBModel.CompanyCentre">
+        <MappingFragment StoreEntitySet="CompanyCentres">
+          <ScalarProperty Name="ccId" ColumnName="ccId" />
+          <ScalarProperty Name="cccountry" ColumnName="cccountry" />
+          <ScalarProperty Name="ccity" ColumnName="ccity" />
+          <ScalarProperty Name="mycid" ColumnName="mycid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

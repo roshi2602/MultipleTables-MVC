@@ -1,0 +1,24 @@
+﻿@using MultipleTablesinMVC.Models
+@model  IEnumerable<Company>     
+    <!--Ienumaerable because we add list<company> and format is to add using before it-->
+    
+@{ 
+    ViewBag.title = "Company";
+}
+
+
+<h2>Company</h2>
+<ul>
+
+    @foreach (Company i in Model)
+
+    {
+    <li>
+        @Html.ActionLink(i.cname, "Details", "CompanyCentre", new { companyid = i.cid }, null)<!--very important-->
+    </li>
+            }
+            <!--syntax of action link-
+            (string text, action method, controller, new{controller id= model.second controller id}, null)
+            -->
+        
+    </ul>

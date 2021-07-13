@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompanyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="int" Nullable="false" />
+    <Property Name="cname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cloc" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyCentres">
+    <Key>
+      <PropertyRef Name="ccId" />
+    </Key>
+    <Property Name="ccId" Type="int" Nullable="false" />
+    <Property Name="cccountry" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ccity" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="mycid" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__CompanyCe__mycid__286302EC">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="CompanyCentres" Type="Self.CompanyCentres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="cid" />
+      </Principal>
+      <Dependent Role="CompanyCentres">
+        <PropertyRef Name="mycid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CompanyDBModelStoreContainer">
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyCentres" EntityType="Self.CompanyCentres" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CompanyCe__mycid__286302EC" Association="Self.FK__CompanyCe__mycid__286302EC">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="CompanyCentres" EntitySet="CompanyCentres" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
